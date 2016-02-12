@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3559.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.
 import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
 
 /**
@@ -8,17 +10,23 @@ import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
+	
+	private Joystick gamepad = new Joystick(0);
+	
+	public OI() {
+		JoystickButton greenA 		= new JoystickButton(gamepad, 2);
+		JoystickButton redB 		= new JoystickButton(gamepad, 3);
+		JoystickButton blueX 		= new JoystickButton(gamepad, 1);
+		JoystickButton orangeY		= new JoystickButton(gamepad, 4);
+		JoystickButton lBumper 		= new JoystickButton(gamepad, 5);
+		JoystickButton rBumper 		= new JoystickButton(gamepad, 6);
+		JoystickButton lTrigger 	= new JoystickButton(gamepad, 7);
+		JoystickButton rTrigger 	= new JoystickButton(gamepad, 8);
+		
+	}
+	public Joystick getJoystick() {
+		return gamepad;
+	}
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
