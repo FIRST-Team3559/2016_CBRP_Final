@@ -33,6 +33,7 @@ public class DriveTrain extends Subsystem {
 		// TODO: add code to get QuadEncoder data from right_motor
 		drive = new RobotDrive(left_motor, right_motor);
 		
+
 		//Let's show everything on the LiveWindow
 		LiveWindow.addActuator("Drive Train", "Front_Left Motor", (CANTalon) left_motor);
 		LiveWindow.addActuator("Drive Train", "Front Right Motor", (CANTalon) right_motor);
@@ -40,6 +41,7 @@ public class DriveTrain extends Subsystem {
 		// LiveWindow.addSensor("Drive Train", "Left Encoder", left_encoder);
 		// LiveWindow.addSensor("Drive Train", "Right Encoder", right_encoder);
 		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
+		
 	}
 		/**
 		 * When no other command is running let the operator drive around
@@ -64,7 +66,7 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(left,  right);
     }
     /**
-     * @param joy The ps# style joystick to use to drive tank style.
+     * @param joy The ps# style Joystick to use to drive tank style.
      */
     public void drive(Joystick gamepad){
     	drive(-gamepad.getY(), -gamepad.getRawAxis(4));
@@ -84,6 +86,7 @@ public class DriveTrain extends Subsystem {
     	// left_encoder.reset();
     	// right_encoder.reset();
     }
+    
 }
 
 
