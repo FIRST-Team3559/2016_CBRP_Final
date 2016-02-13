@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,20 +19,25 @@ import edu.wpi.first.wpilibj.SpeedController;
  */
 public class DriveTrain extends Subsystem {
 	private SpeedController front_left_motor, back_left_motor, front_right_motor, back_right_motor;
-    gyro = new AnalogGyro(1);
-    left_encoder = new Encoder(1, 2);
-    right_encoder = new Encoder(3, 4);
+    
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private RobotDrive drive;
+	private Encoder left_encoder, right_encoder;
 	private AnalogGyro gyro;
 	private DriveTrain(){
+		super();
+		drive = new RobotDrive(front_left_motor, back_left_motor, front_right_motor, back_right_motor);
+		left_encoder = new Encoder(1, 2);
+		right_encoder = new Encoder(3, 4);
+		gyro = new AnalogGyro(1);
 		//Let's show everything on the LiveWindow
 		LiveWindow.addActuator("Drive Train", "Front_Left Motor", (CANTalon) front_left_motor);
 		LiveWindow.addActuator("Drive Train", "Front Right Motor", (CANTalon) front_right_motor);
 		LiveWindow.addSensor("Drive Train", "Left Encoder", left_encoder);
 		LiveWindow.addSensor("Drive Train", "Right Encoder", right_encoder);
 		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
+		
 	}
 		/**
 		 * When no other command is running let the operator drive around
@@ -55,7 +61,7 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(left,  right);
     }
     /**
-     * @param joy The ps# style joystick to use to drive tank style.
+     * @param joy The ps# style Joystick to use to drive tank style.
      */
     public void drive(Joystick joy){
     	drive(-joy.getY(), -joy.getAxis(AxisType.kThrottle));
@@ -74,6 +80,7 @@ public class DriveTrain extends Subsystem {
     	left_encoder.reset();
     	right_encoder.reset();
     }
+    
 }
 
 
