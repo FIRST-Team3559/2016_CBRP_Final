@@ -1,54 +1,63 @@
+/**
+ * DriveTrain.class code for 2016 Robot
+ * Written By: Nathaniel L. James
+ * Supervised By: Mr. Routson
+ * Created: 11 FEB 2016
+ * Edited: 13 FEB 2016
+ * 
+ **/
+
 package org.usfirst.frc.team3559.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.RobotDrive;
+import org.usfirst.frc.team3559.robot.commands.TankDriveWithGamepad;
+
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.wpi.first.frc.team3559.robot.Robot;
-import edu.wpi.first.wpilib.team3559.robot.commands.TankDriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.SpeedController;
 
-/**
- *
- */
+
 public class DriveTrain extends Subsystem {
-	private SpeedController front_left_motor, back_left_motor, front_right_motor, back_right_motor;
-    gyro = new AnalogGyro(1);
-    left_encoder = new Encoder(1, 2);
-    right_encoder = new Encoder(3, 4);
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	private SpeedController left_motor, right_motor;
 	private RobotDrive drive;
 	private AnalogGyro gyro;
-	private DriveTrain(){
+	public DriveTrain(){
+		super();
+		left_motor = new CANTalon(1);
+		// TODO: add code to get QuadEncoder data from left_motor
+		right_motor = new CANTalon(2);
+		// TODO: add code to get QuadEncoder data from right_motor
+		drive = new RobotDrive(left_motor, right_motor);
+		
 		//Let's show everything on the LiveWindow
-		LiveWindow.addActuator("Drive Train", "Front_Left Motor", (CANTalon) front_left_motor);
-		LiveWindow.addActuator("Drive Train", "Front Right Motor", (CANTalon) front_right_motor);
-		LiveWindow.addSensor("Drive Train", "Left Encoder", left_encoder);
-		LiveWindow.addSensor("Drive Train", "Right Encoder", right_encoder);
+		LiveWindow.addActuator("Drive Train", "Front_Left Motor", (CANTalon) left_motor);
+		LiveWindow.addActuator("Drive Train", "Front Right Motor", (CANTalon) right_motor);
+		// TODO: Send the QuadEncoder data to the SmartDashboard _next two lines_
+		// LiveWindow.addSensor("Drive Train", "Left Encoder", left_encoder);
+		// LiveWindow.addSensor("Drive Train", "Right Encoder", right_encoder);
 		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
 	}
 		/**
 		 * When no other command is running let the operator drive around
-		 * using the PS3 joystick.
-		 */
+		 * using the Logitech gamepad.
+		 **/
 		
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new TankDriveWithJoystick());
+    	setDefaultCommand(new TankDriveWithGamepad());
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
-    	SmartDashboard.putNumber("right Distance", right_encoder.getDistance());
-    	SmartDashboard.putNumber("Left Speed", left_encoder.getRate());
-    	SmartDashboard.putNumber("Right Speed",  right_encoder.getRate());
+    	// TODO: Fix next 4 lines for QuadEncoder data
+    	// SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
+    	// SmartDashboard.putNumber("right Distance", right_encoder.getDistance());
+    	// SmartDashboard.putNumber("Left Speed", left_encoder.getRate());
+    	// SmartDashboard.putNumber("Right Speed",  right_encoder.getRate());
     	SmartDashboard.putNumber("Gyro",  gyro.getAngle());
     }
     public void drive(double left, double right){
@@ -57,8 +66,8 @@ public class DriveTrain extends Subsystem {
     /**
      * @param joy The ps# style joystick to use to drive tank style.
      */
-    public void drive(Joystick joy){
-    	drive(-joy.getY(), -joy.getAxis(AxisType.kThrottle));
+    public void drive(Joystick gamepad){
+    	drive(-gamepad.getY(), -gamepad.getRawAxis(4));
     }
     /**
      * @return The robots heading in degrees.
@@ -71,8 +80,9 @@ public class DriveTrain extends Subsystem {
      */
     public void reset(){
     	gyro.reset();
-    	left_encoder.reset();
-    	right_encoder.reset();
+    	// TODO: Fix next two lines to reset the QuadEncoder data from CAN bus
+    	// left_encoder.reset();
+    	// right_encoder.reset();
     }
 }
 
