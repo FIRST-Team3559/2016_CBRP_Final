@@ -3,12 +3,13 @@
 /*  Chief Programmer -> Nathaniel L. James (Nate--X)               */
 /*  Advisor -> Mr. Routson (froutson)                              */
 /*  https://github.com/FIRST-Team3559/2016_CBRP_Final              */
-/*  Begin Date -> 12FEB2016                                        */
-/*  Most Recent Update -> 12FEB2016								   */
+/*  Created On -> 12FEB2016                                        */
+/*  Most Recent Update -> 14FEB2016								   */
 /*-----------------------------------------------------------------*/
 
 package org.usfirst.frc.team3559.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -17,7 +18,7 @@ import org.usfirst.frc.team3559.robot.commands.Autonomous;
 // import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
 // import org.usfirst.frc.team3559.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3559.robot.subsystems.DriveTrain;
-// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -30,25 +31,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	// public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final DriveTrain drivetrain;
+	public static final DriveTrain drivetrain = new DriveTrain();
 	public static OI oi;
+	CameraServer cameraserver = CameraServer.getInstance();
 
 	Command autonomousCommand;
-	// SendableChooser chooser;
+	SendableChooser chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		drivetrain = new DriveTrain();
+		
 		oi = new OI();
-		// chooser = new SendableChooser();
-		// chooser.addDefault("Default Auto", new ExampleCommand());
+		// TODO: Fix next 4 lines - SendableChooser - to get choice on SmartDashboard
+		chooser = new SendableChooser();
+		chooser.addDefault("Default Auto", new Autonomous());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		cameraserver.setQuality(50);
+		cameraserver.startAutomaticCapture("cam0");
 		
-		autonomousCommand = new Autonomous();
+		// autonomousCommand = new Autonomous();
 		
 		// Show what command your subsystem is running on SmartDashboard
 		SmartDashboard.putData(drivetrain);
