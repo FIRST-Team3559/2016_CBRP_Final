@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurboMode extends Command {
 	
 	private double highSpeed = 1.0;
-	private double lowSpeed = 0.3;
+	private double lowSpeed = 0.6;
 
     public TurboMode() {
         // Use requires() here to declare subsystem dependencies
