@@ -29,7 +29,7 @@ public class DriveTrain extends Subsystem {
 	// TODO: All gyro code is disabled until gyro is installed and working
 	// private AnalogGyro gyro;
 	
-	private double speedModifier = 0.6;
+	private double speedModifier = 0.75;
 	
 	public DriveTrain(){
 		super();
@@ -83,7 +83,7 @@ public class DriveTrain extends Subsystem {
      * @param gamepad The Logitech style Gamepad to use to drive tank style.
      */
     public void drive(Joystick gamepad){
-    	drive(-speedModifier*gamepad.getY(), -speedModifier*gamepad.getRawAxis(3));
+    	drive(speedModifier*gamepad.getY(), speedModifier*gamepad.getRawAxis(3));
     }
     /**
      * @return The robots heading in degrees.
