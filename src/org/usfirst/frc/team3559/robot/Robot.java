@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3559.robot.commands.Autonomous;
+import org.usfirst.frc.team3559.robot.subsystems.Arm;
+import org.usfirst.frc.team3559.robot.subsystems.BallLoader;
 // import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
 // import org.usfirst.frc.team3559.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3559.robot.subsystems.DriveTrain;
@@ -32,8 +34,11 @@ public class Robot extends IterativeRobot {
 
 	// public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain drivetrain = new DriveTrain();
+	public static final BallLoader ballloader = new BallLoader();
+	public static final Arm arm = new Arm();
 	public static OI oi;
 	CameraServer cameraserver = CameraServer.getInstance();
+	CameraServer cameraserver1 = CameraServer.getInstance();
 
 	Command autonomousCommand;
 	SendableChooser chooser;
@@ -50,13 +55,16 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new Autonomous());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		cameraserver.setQuality(50);
+		cameraserver.setQuality(20);
 		cameraserver.startAutomaticCapture("cam0");
+		//cameraserver1.setQuality(20);
+		//cameraserver1.startAutomaticCapture("cam1");
 		
 		// autonomousCommand = new Autonomous();
 		
 		// Show what command your subsystem is running on SmartDashboard
 		SmartDashboard.putData(drivetrain);
+		//SmartDashboard.putData(ballloader);
 	}
 
 	/**

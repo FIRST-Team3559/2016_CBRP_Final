@@ -3,8 +3,13 @@ package org.usfirst.frc.team3559.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
+
+import org.usfirst.frc.team3559.robot.commands.ArmDown;
+import org.usfirst.frc.team3559.robot.commands.ArmUp;
+// import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
+import org.usfirst.frc.team3559.robot.commands.LoadBall;
 import org.usfirst.frc.team3559.robot.commands.TurboMode;
+import org.usfirst.frc.team3559.robot.commands.UnloadBall;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,14 +21,20 @@ public class OI {
 	// Button greenA 		= new JoystickButton(gamepad, 2);
 	// Button redB 		= new JoystickButton(gamepad, 3);
 	// Button blueX 		= new JoystickButton(gamepad, 1);
-	// Button orangeY		= new JoystickButton(gamepad, 4);
-	// Button lBumper 		= new JoystickButton(gamepad, 5);
-	// Button rBumper 		= new JoystickButton(gamepad, 6);
+	//Button orangeY		= new JoystickButton(gamepad, 4);
+	Button lBumper 		= new JoystickButton(gamepad, 5);
+	Button rBumper 		= new JoystickButton(gamepad, 6);
 	Button lTrigger 	= new JoystickButton(gamepad, 7);
-	// Button rTrigger 	= new JoystickButton(gamepad, 8);
+	Button rTrigger 	= new JoystickButton(gamepad, 8);
 	
 	public OI() {
-		lTrigger.whileHeld(new TurboMode());
+		lTrigger.whileHeld(new ArmDown());
+		rTrigger.whileHeld(new ArmUp());
+		lBumper.whileHeld(new UnloadBall());
+		//lBumper.whenInactive(new UnloadBall());
+		rBumper.whileHeld(new LoadBall());
+		//rBumper.whenInactive( new LoadBall());
+		
 		
 	}
 	public Joystick getJoystick() {
