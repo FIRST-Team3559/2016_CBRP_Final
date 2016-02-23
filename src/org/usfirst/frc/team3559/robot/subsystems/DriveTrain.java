@@ -26,6 +26,7 @@ public class DriveTrain extends Subsystem {
 	private CANTalon left_motor, right_motor;
 	private CANTalon left_slave, right_slave;
 	private RobotDrive drive;
+	private boolean brake = true;
 	// TODO: All gyro code is disabled until gyro is installed and working
 	// private AnalogGyro gyro;
 	
@@ -34,13 +35,17 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain(){
 		super();
 		left_motor = new CANTalon(1);
+		left_motor.enableBrakeMode(brake);
 		left_slave = new CANTalon(2);
+		left_slave.enableBrakeMode(brake);
 		left_slave.changeControlMode(CANTalon.TalonControlMode.Follower);
 		left_slave.set(left_motor.getDeviceID());		// Second left motor, CANTaonl(2), follows CANTalon(1)
 		left_motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		left_motor.configEncoderCodesPerRev(360);
 		right_motor = new CANTalon(3);
+		right_motor.enableBrakeMode(brake);
 		right_slave = new CANTalon(4);
+		right_slave.enableBrakeMode(brake);
 		right_slave.changeControlMode(CANTalon.TalonControlMode.Follower);
 		right_slave.set(right_motor.getDeviceID());		// Second right motor, CANTalon(4), follows CANTalon(3)
 		right_motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);

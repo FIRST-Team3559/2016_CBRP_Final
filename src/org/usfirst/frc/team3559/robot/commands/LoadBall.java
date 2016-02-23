@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3559.robot.commands;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3559.robot.Robot;
 

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3559.robot.commands;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3559.robot.Robot;
 /**
@@ -30,6 +29,7 @@ public class ArmDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.arm.armStop();
     }
 
     // Called when another command which requires one or more of the same
