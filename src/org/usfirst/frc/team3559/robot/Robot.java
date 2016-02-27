@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3559.robot.commands.Autonomous;
+import org.usfirst.frc.team3559.robot.commands.Autonomous2;
 import org.usfirst.frc.team3559.robot.subsystems.Arm;
 import org.usfirst.frc.team3559.robot.subsystems.BallLoader;
 // import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
@@ -53,7 +54,7 @@ public class Robot extends IterativeRobot {
 		// TODO: Fix next 4 lines - SendableChooser - to get choice on SmartDashboard
 		chooser = new SendableChooser();
 		chooser.addDefault("Default Auto", new Autonomous());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser.addObject("Autonomous2", new Autonomous2());
 		SmartDashboard.putData("Auto mode", chooser);
 		cameraserver.setQuality(20);
 		cameraserver.startAutomaticCapture("cam0");
@@ -92,6 +93,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
+		autonomousCommand.start(); 
 		autonomousCommand = (Command) chooser.getSelected();
 
 		/*

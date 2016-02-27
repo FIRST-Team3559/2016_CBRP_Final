@@ -18,14 +18,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
  */
 public class BallLoader extends Subsystem {
 	private static CANTalon feedMotor = new CANTalon(5);
-	
-	private DigitalInput ballLimit;
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public BallLoader(){
 		super();
-		ballLimit = new DigitalInput(0);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -39,9 +36,6 @@ public class BallLoader extends Subsystem {
     }
     public void ballOut(){
     	feedMotor.set(1);
-    }
-    public boolean isLoaded(){
-    	return ballLimit.get();
     }
 }
 

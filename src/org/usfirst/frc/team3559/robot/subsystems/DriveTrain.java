@@ -116,6 +116,18 @@ public class DriveTrain extends Subsystem {
     public void modifySpeed(double newSpeed){
     	this.speedModifier = newSpeed;
     }
+    public void straight(){
+    	left_motor.set(1);
+    	right_motor.set(1);
+    }
+    public void right(){
+    	left_motor.set(1);
+    	right_motor.set(.5);
+    }
+    public void left(){
+    	left_motor.set(.5);
+    	right_motor.set(1);    	
+    }
     
 }
 
