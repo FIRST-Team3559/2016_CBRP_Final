@@ -10,14 +10,14 @@
 package org.usfirst.frc.team3559.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  *  Use a Talon in CAN mode to load and unload a game piece.
  */
 public class BallLoader extends Subsystem {
-	private static CANTalon feedMotor = new CANTalon(5);
+	private static Victor feedMotor = new Victor(1);
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

@@ -130,6 +130,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 	}
 
 	/**
@@ -141,5 +142,6 @@ public class Robot extends IterativeRobot {
 	
 	private void log() {
 		drivetrain.log();
+		arm.log();
 	}
 }
