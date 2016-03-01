@@ -14,6 +14,7 @@ import org.usfirst.frc.team3559.robot.commands.TankDriveWithGamepad;
 // import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 // import edu.wpi.first.wpilibj.SpeedController;		// I don't think I use this.
@@ -41,6 +42,7 @@ public class DriveTrain extends Subsystem {
 		left_slave.changeControlMode(CANTalon.TalonControlMode.Follower);
 		left_slave.set(left_motor.getDeviceID());		// Second left motor, CANTaonl(2), follows CANTalon(1)
 		left_motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		left_motor.reverseSensor(false);
 		left_motor.configEncoderCodesPerRev(360);
 		right_motor = new CANTalon(3);
 		right_motor.enableBrakeMode(brake);
@@ -49,6 +51,7 @@ public class DriveTrain extends Subsystem {
 		right_slave.changeControlMode(CANTalon.TalonControlMode.Follower);
 		right_slave.set(right_motor.getDeviceID());		// Second right motor, CANTalon(4), follows CANTalon(3)
 		right_motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		right_motor.reverseSensor(true);
 		right_motor.configEncoderCodesPerRev(360);
 		
 		drive = new RobotDrive(left_motor, right_motor);
@@ -78,6 +81,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("right Distance", right_motor.getPosition());
     	SmartDashboard.putNumber("Left Speed", left_motor.getSpeed());
     	SmartDashboard.putNumber("Right Speed",  right_motor.getSpeed());
+    	SmartDashboard.putNumber("Speed Modifier", speedModifier);
     	// TODO: Add gyro output to smart dashboard
     	// SmartDashboard.putNumber("Gyro",  gyro.getAngle());
     }
@@ -88,7 +92,24 @@ public class DriveTrain extends Subsystem {
      * @param gamepad The Logitech style Gamepad to use to drive tank style.
      */
     public void drive(Joystick gamepad){
-    	drive(speedModifier*gamepad.getY(), speedModifier*gamepad.getRawAxis(3));
+    	left_motor.changeControlMode(TalonControlMode.PercentVbus);
+    	left_motor.setPID(0.0, 0.0, 0.0);
+    	left_motor.enableControl();
+    	right_motor.changeControlMode(TalonControlMode.PercentVbus);
+    	right_motor.setPID(0.0, 0.0, 0.0);
+    	right_motor.enableControl();
+    	drive(-speedModifier*gamepad.getY(), -speedModifier*gamepad.getRawAxis(3));
+    }
+    
+    public void moveAhead(int count){
+    	left_motor.changeControlMode(TalonControlMode.Position);
+    	left_motor.setPID(0.5, 0.0, 0.0);
+    	left_motor.enableControl();
+    	right_motor.changeControlMode(TalonControlMode.Position);
+    	right_motor.setPID(0.5, 0.0, 0.0);
+    	right_motor.enableControl();
+    	right_motor.set(-count);
+    	left_motor.set(count);
     }
     /**
      * @return The robots heading in degrees.
