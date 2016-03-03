@@ -93,23 +93,27 @@ public class DriveTrain extends Subsystem {
      */
     public void drive(Joystick gamepad){
     	left_motor.changeControlMode(TalonControlMode.PercentVbus);
-    	left_motor.setPID(0.0, 0.0, 0.0);
+    	left_motor.setPID(0.0, 0.0, 1.0);
     	left_motor.enableControl();
     	right_motor.changeControlMode(TalonControlMode.PercentVbus);
-    	right_motor.setPID(0.0, 0.0, 0.0);
+    	right_motor.setPID(0.0, 0.0, 1.0);
     	right_motor.enableControl();
     	drive(-speedModifier*gamepad.getY(), -speedModifier*gamepad.getRawAxis(3));
     }
     
     public void moveAhead(int count){
+    	left_motor.setVoltageRampRate(2);
+    	right_motor.setVoltageRampRate(2);
     	left_motor.changeControlMode(TalonControlMode.Position);
-    	left_motor.setPID(0.5, 0.0, 0.0);
+    	left_motor.setPID(0.06, 0.0, 0.0);
     	left_motor.enableControl();
+    	right_motor.reverseOutput(true);
     	right_motor.changeControlMode(TalonControlMode.Position);
-    	right_motor.setPID(0.5, 0.0, 0.0);
+    	right_motor.setPID(0.06, 0.0, 0.0);
     	right_motor.enableControl();
-    	right_motor.set(-count);
+    	right_motor.set(count);
     	left_motor.set(count);
+    	
     }
     /**
      * @return The robots heading in degrees.
@@ -129,6 +133,7 @@ public class DriveTrain extends Subsystem {
     	// gyro.reset();
     	left_motor.setEncPosition(0);
     	right_motor.setEncPosition(0);
+    	left_motor.setPosition(0.0);
     }
     
     /**
