@@ -54,18 +54,14 @@ public class Robot extends IterativeRobot {
 		// TODO: Fix next 4 lines - SendableChooser - to get choice on SmartDashboard
 		chooser = new SendableChooser();
 		chooser.addDefault("Default Auto", new Autonomous());
-		chooser.addObject("Autonomous2", new Autonomous2());
+		chooser.addObject("Move, Cross, Shoot", new Autonomous2());
 		SmartDashboard.putData("Auto mode", chooser);
 		cameraserver.setQuality(20);
 		cameraserver.startAutomaticCapture("cam0");
-		//cameraserver1.setQuality(20);
-		//cameraserver1.startAutomaticCapture("cam1");
-		
 		// autonomousCommand = new Autonomous();
-		
+		Robot.drivetrain.reset();
 		// Show what command your subsystem is running on SmartDashboard
 		SmartDashboard.putData(drivetrain);
-		//SmartDashboard.putData(ballloader);
 	}
 
 	/**
@@ -93,7 +89,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-		autonomousCommand.start(); 
+		// autonomousCommand.start(); 
 		autonomousCommand = (Command) chooser.getSelected();
 
 		/*
@@ -123,6 +119,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
 	}
 
 	/**
