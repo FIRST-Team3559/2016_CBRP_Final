@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3559.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,7 +9,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Autonomous extends CommandGroup {
 
     public Autonomous() {
-    	addSequential(new DriveStraight());
+    	/*int time = 0;
+    	while(time <10){
+    		addSequential(new DriveStraight());
+    	}time += 1; 
+    	while(time >10 && time <20){
+    		addSequential(new TurnRight());
+    	}*/
+    	
+    	
     	
     	
     	

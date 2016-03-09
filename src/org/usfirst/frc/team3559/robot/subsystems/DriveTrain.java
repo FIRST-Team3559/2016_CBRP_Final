@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
 	// TODO: All gyro code is disabled until gyro is installed and working
 	// private AnalogGyro gyro;
 	
-	private double speedModifier = 0.75;
+	private double speedModifier = 0.80;
 	
 	public DriveTrain(){
 		super();
@@ -55,6 +55,7 @@ public class DriveTrain extends Subsystem {
 		right_motor.configEncoderCodesPerRev(360);
 		
 		drive = new RobotDrive(left_motor, right_motor);
+		drive.setSafetyEnabled(false);
 		
 
 		//Let's show everything on the LiveWindow
@@ -93,12 +94,14 @@ public class DriveTrain extends Subsystem {
      */
     public void drive(Joystick gamepad){
     	left_motor.changeControlMode(TalonControlMode.PercentVbus);
-    	left_motor.setPID(0.0, 0.0, 1.0);
+    	left_motor.setVoltageRampRate(0);
+    	left_motor.setPID(0.0, 0.0, 0.0);
     	left_motor.enableControl();
     	right_motor.changeControlMode(TalonControlMode.PercentVbus);
-    	right_motor.setPID(0.0, 0.0, 1.0);
+    	right_motor.setVoltageRampRate(0);
+    	right_motor.setPID(0.0, 0.0, 0.0);
     	right_motor.enableControl();
-    	drive(-speedModifier*gamepad.getY(), -speedModifier*gamepad.getRawAxis(3));
+    	drive(speedModifier*gamepad.getY(), speedModifier*gamepad.getRawAxis(3));
     }
     
     public void moveAhead(int count){
@@ -107,11 +110,21 @@ public class DriveTrain extends Subsystem {
     	left_motor.changeControlMode(TalonControlMode.Position);
     	left_motor.setPID(0.06, 0.0, 0.0);
     	left_motor.enableControl();
-    	right_motor.reverseOutput(true);
+    	left_motor.reverseOutput(true);
+    	right_motor.reverseOutput(false);
     	right_motor.changeControlMode(TalonControlMode.Position);
     	right_motor.setPID(0.06, 0.0, 0.0);
     	right_motor.enableControl();
     	right_motor.set(count);
+    	left_motor.set(count);
+    	
+    }
+    public void moveRight(int count){
+    	left_motor.setVoltageRampRate(2);
+    	left_motor.changeControlMode(TalonControlMode.Position);
+    	left_motor.setPID(0.06, 0.0, 0.0);
+    	left_motor.enableControl();
+    	left_motor.reverseOutput(true);
     	left_motor.set(count);
     	
     }

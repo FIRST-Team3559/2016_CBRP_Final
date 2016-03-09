@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 	public static final Arm arm = new Arm();
 	public static OI oi;
 	CameraServer cameraserver = CameraServer.getInstance();
-	CameraServer cameraserver1 = CameraServer.getInstance();
+	// CameraServer cameraserver1 = CameraServer.getInstance();
 
 	Command autonomousCommand;
 	SendableChooser chooser;

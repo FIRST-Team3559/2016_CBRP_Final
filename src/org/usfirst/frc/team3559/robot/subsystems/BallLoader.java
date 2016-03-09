@@ -29,13 +29,13 @@ public class BallLoader extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public void ballIn (){
-    	feedMotor.set(-.7);
+    	feedMotor.set(.7);
     }
     public void ballstop(){
     	feedMotor.set(0.0);
     }
     public void ballOut(){
-    	feedMotor.set(1);
+    	feedMotor.set(-1);
     }
 }
 
