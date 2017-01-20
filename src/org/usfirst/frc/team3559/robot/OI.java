@@ -6,9 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team3559.robot.commands.ArmDown;
 import org.usfirst.frc.team3559.robot.commands.ArmUp;
-// import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3559.robot.commands.LoadBall;
-import org.usfirst.frc.team3559.robot.commands.TurboMode;
 import org.usfirst.frc.team3559.robot.commands.UnloadBall;
 
 /**
@@ -19,9 +17,9 @@ public class OI {
 	
 	private Joystick gamepad = new Joystick(0);
 	// Button greenA 		= new JoystickButton(gamepad, 2);
-	// Button redB 		= new JoystickButton(gamepad, 3);
+	// Button redB 			= new JoystickButton(gamepad, 3);
 	// Button blueX 		= new JoystickButton(gamepad, 1);
-	//Button orangeY		= new JoystickButton(gamepad, 4);
+	// Button orangeY		= new JoystickButton(gamepad, 4);
 	Button lBumper 		= new JoystickButton(gamepad, 5);
 	Button rBumper 		= new JoystickButton(gamepad, 6);
 	Button lTrigger 	= new JoystickButton(gamepad, 7);

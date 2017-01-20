@@ -11,7 +11,6 @@ package org.usfirst.frc.team3559.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  *  Use a Talon in CAN mode to load and unload a game piece.

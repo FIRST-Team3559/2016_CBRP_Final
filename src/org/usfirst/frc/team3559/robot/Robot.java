@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team3559.robot.commands.Autonomous;
-import org.usfirst.frc.team3559.robot.commands.Autonomous2;
+// import org.usfirst.frc.team3559.robot.commands.Autonomous;
+// import org.usfirst.frc.team3559.robot.commands.Autonomous2;
 import org.usfirst.frc.team3559.robot.subsystems.Arm;
 import org.usfirst.frc.team3559.robot.subsystems.BallLoader;
 // import org.usfirst.frc.team3559.robot.commands.ExampleCommand;
 // import org.usfirst.frc.team3559.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3559.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	// CameraServer cameraserver1 = CameraServer.getInstance();
 
 	Command autonomousCommand;
-	SendableChooser chooser;
+	// SendableChooser chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -52,12 +52,17 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		// TODO: Fix next 4 lines - SendableChooser - to get choice on SmartDashboard
+		/**
+		 * The chooser function does not work in the 2017 code/library updates. -FAR, 20JAN2017
+		 * the 
 		chooser = new SendableChooser();
 		chooser.addDefault("Default Auto", new Autonomous());
 		chooser.addObject("Move, Cross, Shoot", new Autonomous2());
 		SmartDashboard.putData("Auto mode", chooser);
-		cameraserver.setQuality(20);
-		cameraserver.startAutomaticCapture("cam0");
+		*/
+		
+		cameraserver.startAutomaticCapture(0);
+
 		// autonomousCommand = new Autonomous();
 		Robot.drivetrain.reset();
 		// Show what command your subsystem is running on SmartDashboard
@@ -90,7 +95,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 		// autonomousCommand.start(); 
-		autonomousCommand = (Command) chooser.getSelected();
+		// autonomousCommand = (Command) chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

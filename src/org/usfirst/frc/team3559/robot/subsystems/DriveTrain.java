@@ -11,10 +11,9 @@ package org.usfirst.frc.team3559.robot.subsystems;
 
 import org.usfirst.frc.team3559.robot.commands.TankDriveWithGamepad;
 
-// import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 // import edu.wpi.first.wpilibj.SpeedController;		// I don't think I use this.
